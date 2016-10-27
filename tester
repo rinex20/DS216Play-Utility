@@ -1,0 +1,29 @@
+#!/bin/sh
+echo "Please run it with source command!"
+i1=`ps -ef | grep -E "ss-local*"|grep -v grep|awk '{print $2}'`
+if (kill -9 $i1)
+then
+{
+	echo 'ss killed'
+}
+else
+{
+	echo 'no ss found!'
+}
+fi
+~/Software/ShadowSocks/bin/ss-local -c ~/Software/ShadowSocks/bin/config.json &
+echo "ss lunched!"
+
+i2=`ps -ef | grep -E "privoxy*"|grep -v grep|awk '{print $2}'`
+if (kill -9 $i2)
+then
+{
+	echo 'privoxy killed'
+}
+else
+{
+	echo 'no privoxy found!'
+}
+fi
+privoxy ~/Software/ShadowSocks/privoxy.config
+echo "privoxy lunched!"
